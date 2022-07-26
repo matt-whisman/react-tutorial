@@ -1,24 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Post from "./Post";
 
 export default function PostList() {
-  const [posts, setPosts] = useState([
-    {
-      id: 0,
-      title: "Test Post",
-      text: "This is text",
-    },
-    {
-      id: 1,
-      title: "Test Post 2",
-      text: "This is text again",
-    },
-    {
-      id: 2,
-      title: "Test Post 3",
-      text: "This is text again, again",
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // fetch('http://127.0.0.1:5000/api/posts')
+    fetch("https://fakebook-june-2022.herokuapp.com/api/posts")
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+  }, []);
 
   return (
     <>
